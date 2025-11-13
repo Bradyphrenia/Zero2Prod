@@ -4,8 +4,8 @@ async fn greet(req:HttpRequest)-> impl Responder{
     format!("Hello {}!",&name)
 }
 #[tokio::main]
-async fn main() -> std::io::Result<()> {
-    HttpServer::new(||App::new().route("/{name}",web::get().to(greet)))
+async fn main() -> Result<(), std::io::Error> {
+    HttpServer::new(||App::new().route("/",web::get().to(greet)))
     .bind("127.0.0.1:8080")?
     .run()
     .await
